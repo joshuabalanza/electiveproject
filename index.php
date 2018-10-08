@@ -38,7 +38,7 @@
   <h1 class="display-5">Data Visualization of Registered Motor Vehicle 2010 - 2013</h1>
   <div class="form-group">
     <select class="custom-select">
-      <option selected="">Select Year to Visualized</option>
+      <option selected="">Select Year to Visualize</option>
       <option value="1">2013</option>
       <option value="2">2012</option>
       <option value="3">2011</option>
