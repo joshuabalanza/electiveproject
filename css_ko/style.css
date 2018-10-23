@@ -40,8 +40,8 @@ div#page {
     /* margin:10px 40px 10px 245px; */
     margin-left: 325px;
     margin-top: 10px;
-    min-height:500px;
-    _height:500px
+    min-height:600px;
+    _height:600px
   }
 
   div#footer {
@@ -51,3 +51,8 @@ div#page {
     background-color: whitesmoke;
     align-content: center;
   }
+#btnko {
+    width: 100%;
+    color: rgb(0, 0, 0);
+    font: bolder;
+}

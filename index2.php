@@ -3,7 +3,7 @@ $con= mysqli_connect("localhost","root","","registered_vehicles");
 
 
 
-$query = "SELECT * from tbl_total ";
+$query = "SELECT * from tbl_vehicle_use ";
 $result = mysqli_query($con,$query);
 
 ?>
@@ -38,7 +38,7 @@ $result = mysqli_query($con,$query);
         <a class="nav-link" href="#">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="index3.php">Add DATA</a>
+      <a class="nav-link" href="index3.php">Add DATA</a>
       </li>
     </ul>
   </div>
@@ -49,14 +49,47 @@ $result = mysqli_query($con,$query);
 <div id="page" class="jumbotron">
 <!-- Menu -->
 <div id="menu" class="jumbotron menu-sidebar d-none d-lg-block">
-  <h1 class="display-5">Data Visualization of <br /> Registered <br /> Motor <br />Vehicle<br /> in<br /> year <br /> 2010 - 2013</h1>
-</div> 
+  <h1 class="display-5">Data Visualization of Registered Motor Vehicle</h1>
+  <br />
+  <br />
+  <div class="form-group">
+    <?php
+    if(isset($_POST["fieldData"])) {
+        $fielddata = $_POST["fieldData"];
+        $query2 ="SELECT * from tbl_vehicle_use WHERE year = '$fielddata'";
+        $result2 = mysqli_query($con,$query2);
+    }
+        
+    ?>
+  <form action="" method="POST">
+    <select id="fieldData" name="fieldData" class="custom-select">
+
+      <option selected="">Select Year to Visualize</option>
+      <?php while($row = mysqli_fetch_array($result)):;?>
+        <option><?php echo $row[0];?></option>; 
+      <?php endwhile?>
+      
+    </select>
+    <br />
+    <br />
+    <button id="btnko" type="submit" class="btn btn-info" name="submit">SUBMIT</button>
+  </form>
+  </div>
+  
+</div>
 <!-- <div id="menu">Menu</div> -->
-<!-- end of menu
+<!-- end of menu -->
 
 <!-- Content -->
-<div id="content" class="jumbotron justify-content-center">
-<h1 class="display-5">Visualization of Registered Vehicles</h1>
+<div id="content" class="jumbotron">
+
+<?php if(isset($_POST["fieldData"])):;?>
+<?php $row = mysqli_fetch_array($result2);?>
+
+<h1 class="display-5">Visualization of Car Registered in year
+<?php echo "'".$row["year"]."'";?>
+</h1>
+
 <script>
             window.onload = function () {
 
@@ -74,14 +107,13 @@ $result = mysqli_query($con,$query);
                     type: "pie",
                     showInLegend: true,
                     toolTipContent: "{name}: <strong>{y}%</strong>",
-                    indexLabel: "{name} - {y}%",
-                    dataPoints: [
-                        //{ y: 27, name: "Year 2013", exploded: true }
-                        <?php while($row = mysqli_fetch_array($result))  
-                          {
-                              echo "{y: parseInt('".$row["rate"]."'), name: 'Year ".$row["year"]."', exploded: true},"; 
-                          }
-                          ?>
+                    indexLabel: "{name} - {y}",
+                    dataPoints: [                  
+                            <?php  echo "{y: parseInt('".$row["private"]."'), name: 'Private ".$row["year"]."', exploded: true},";?>
+                            <?php  echo "{y: parseInt('".$row["for_hire"]."'), name: 'For Hire ".$row["year"]."', exploded: true},";?>
+                            <?php  echo "{y: parseInt('".$row["government"]."'), name: 'Government ".$row["year"]."', exploded: true},";?>
+                            <?php  echo "{y: parseInt('".$row["diplomatic"]."'), name: 'Diplomatic ".$row["year"]."', exploded: true},";?>
+                            <?php  echo "{y: parseInt('".$row["tax_exempt"]."'), name: 'Tax Exempt ".$row["year"]."', exploded: true},";?>
                     ]
                 }]
             });
@@ -106,7 +138,7 @@ $result = mysqli_query($con,$query);
             }
                 </script>
                 <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
-                
+<?php endif?>
 </div>
 
 
@@ -118,20 +150,20 @@ $result = mysqli_query($con,$query);
   <!-- navigation bar -->
   <div>
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#">&laquo;</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
+            <li class="page-item">
+                <a class="page-link" href="index.php">&laquo;</a>
             </li>
             <li class="page-item">
+                <a class="page-link" href="index.php">1</a>
+            </li>
+            <li class="page-item active">
                 <a class="page-link" href="index2.php">2</a>
             </li>
             <li class="page-item">
                 <a class="page-link" href="index3.php">3</a>
             </li>
             <li class="page-item">
-                <a class="page-link" href="index2.php">&raquo;</a>
+                <a class="page-link" href="index3.php">&raquo;</a>
             </li>
         </ul>
     </div>
