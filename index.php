@@ -35,7 +35,7 @@ $result = mysqli_query($con,$query);
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="rate.php">Rate</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="index3.php">Add DATA</a>
